@@ -121,5 +121,19 @@ fi
 # Make the trap inert if the sidecar was reused — don't kill someone else's process.
 if [ "$GW_REUSED" = "1" ]; then trap - EXIT INT TERM; fi
 
+# Sanity: openclaw.json is local per-machine config (gitignored), so the
+# axet provider block has to be pasted in once. Warn instead of failing
+# so a half-configured machine still boots — the gateway just won't list
+# axet/* models in /api/gateway/models, which is silent at the UI level.
+ACTIVE_CFG="${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json}"
+if [ -f "$ACTIVE_CFG" ] && ! grep -q '"axet"[[:space:]]*:' "$ACTIVE_CFG"; then
+  echo ""
+  echo "[axet] WARNING: active config has no \"axet\" provider block:"
+  echo "         $ACTIVE_CFG"
+  echo "       Paste the snippet from $DIR/start-axet.README.md under models.providers,"
+  echo "       otherwise axet/gpt-* models won't appear in the work-console agent UI."
+  echo ""
+fi
+
 echo "[axet] launching openclaw..."
 exec "$DIR/start-ollama.sh" "${ARGS[@]}"
