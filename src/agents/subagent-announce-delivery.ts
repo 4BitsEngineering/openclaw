@@ -520,7 +520,6 @@ async function maybeQueueSubagentAnnounce(params: {
       },
       settings: queueSettings,
       send: sendAnnounce,
-      shouldDefer: (item) => resolveRequesterSessionActivity(item.sessionKey).isActive,
     });
     return didQueue ? "queued" : "dropped";
   }
