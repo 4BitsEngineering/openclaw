@@ -27,7 +27,7 @@ done
 
 if [ -z "$GW_DIR" ] || [ ! -f "$GW_DIR/gateway/axet-ai-gateway.server.cjs" ]; then
   echo "axet-gateway not found at $DIR/../axet-gateway"
-  echo "Clone https://github.com/jotajota1302/axet-gateway alongside openclaw-ollama"
+  echo "Clone https://github.com/jotajota1302/axet-gateway alongside openclaw"
   exit 1
 fi
 

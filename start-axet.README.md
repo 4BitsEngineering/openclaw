@@ -64,6 +64,6 @@ check that:
 ## Why this lives here, not in openclaw-ntt
 
 `openclaw-ntt` previously carried this provider block in its tracked
-`openclaw.json`. Since openclaw-ollama uses the same gateway code and
+`openclaw.json`. Since openclaw uses the same gateway code and
 talks to axet via the same OpenAI-compatible interface, ntt is redundant
 once the snippet above is applied to the active overlay.
